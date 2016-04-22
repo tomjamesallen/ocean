@@ -11,8 +11,9 @@
     position: relative;
     width: 100%;
     height: $unit;
-    background-color: $grey-dark;
+    background-color: $white;
     border: 2px solid $grey-dark;
+    // border-bottom: 2px solid $grey-dark;
     cursor: pointer;
   }
 
@@ -21,7 +22,8 @@
     left: 0;
     top: 0;
     height: 100%;
-    background-color: $white;
+    background-color: $grey-dark;
+    border: 1px solid $white;
   }
 
   &__playlist-row {
@@ -31,5 +33,30 @@
 
   &__playlist-row-img {
     
+  }
+
+  &__track-list {
+    list-style-type: none;
+    margin-left: 0;
+    margin-bottom: $unit;
+  }
+
+  &__track {
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: $h4;
+    cursor: pointer;
+  }
+
+  &__track-length {
+    font-size: $small;
+    margin-left: $unit/2;
+  }
+
+  &__loader {
+    font-weight: 600;
+    font-size: $p;
+    overflow: hidden;
+    text-transform: uppercase;
   }
 }

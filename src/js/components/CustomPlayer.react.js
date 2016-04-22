@@ -7,7 +7,8 @@ const { SoundCloudLogoSVG } = Icons
 var CustomPlayer = React.createClass({
   getInitialState() {
     return {
-      playlistIndex: null
+      playlistIndex: null,
+      loadingTimerCounter: 0
     }
   },
 
@@ -19,6 +20,19 @@ var CustomPlayer = React.createClass({
     let { soundCloudAudio } = this.props
     this.setState({activeIndex: playlistIndex})
     soundCloudAudio.play({ playlistIndex })
+  },
+
+  toggleTrackAtIndex(playlistIndex) {
+    let { soundCloudAudio } = this.props
+    const { activeIndex } = this.state
+    const { playing } = this.props
+
+    if (playing && playlistIndex === activeIndex) {
+      soundCloudAudio.pause()
+    }
+    else {
+      this.playTrackAtIndex(playlistIndex)
+    }
   },
 
   componentWillReceiveProps(nextProps) {
@@ -41,10 +55,8 @@ var CustomPlayer = React.createClass({
   },
 
   renderTrackList() {
-    let { playlist } = this.props
+    let { playlist, currentTime } = this.props
     let { playlistIndex } = this.state
-
-    if (!playlist) return <div>Loading...</div>
 
     // We're only interested in the first two tracks (A & AA).
     playlist.tracks = [
@@ -52,34 +64,69 @@ var CustomPlayer = React.createClass({
       playlist.tracks[1]
     ]
 
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('')
+
     let tracks = playlist.tracks.map((track, i) => {
-      let classes = classNames('', {
-        'is-active': this.state.activeIndex === i
-      });
+      const isActive = this.state.activeIndex === i
+      let classes = classNames(
+        'sc__track',
+        { 'sc__track--active': isActive }
+      )
+
+      let trackTime
+      if (isActive) {
+        trackTime = <span className="sc__track-length">{Timer.prettyTime(currentTime)} / {Timer.prettyTime(track.duration / 1000)}</span>
+      }
 
       return (
-        <div
+        <li
           key={track.id}
-          className='sc__playlist-row grid'
-          onClick={this.playTrackAtIndex.bind(this, i)}
-        >
-          <div className='grid__item two-thirds'>
-            <button
-              className={classes}
-            >
-              <span>{track.user.username} - {track.title}</span>
-              <span>{Timer.prettyTime(track.duration / 1000)}</span>
-            </button>
-          </div>
-        </div>
+          className={classes}
+          onClick={this.toggleTrackAtIndex.bind(this, i)}
+        ><span>{alphabet[i]}. {track.title}</span>{trackTime}</li>
       )
     })
 
     return (
-      <div>{tracks}</div>
+      <ul className='sc__track-list'>{tracks}</ul>
     )
 
     return <div/>
+  },
+
+  timer: null,
+
+  timerCallback() {
+    this.timer = setTimeout(() => {
+      const { loadingTimerCounter } = this.state
+      this.setState({
+        loadingTimerCounter: loadingTimerCounter + 1
+      })
+      this.timerCallback()
+    }, 200)
+  },
+
+  componentWillMount() {
+    this.timerCallback()
+  },
+
+  componentWillUnmount() {
+    clearTimeout(this.timer)
+  },
+
+  startPlaylist() {
+    let { soundCloudAudio } = this.props
+    const { activeIndex } = this.state
+    const { playing } = this.props
+
+    if (!playing) {
+      if (activeIndex) {
+        this.playTrackAtIndex(activeIndex)
+      }
+      else {
+        this.playTrackAtIndex(0)
+      }
+    }
   },
 
   render() {
@@ -102,32 +149,27 @@ var CustomPlayer = React.createClass({
       }
     }
 
+    let loadingText = ' Loading media'
+    const loadingTextChar = ' /'
+
+    var i;
+    for (i = 0; i < this.state.loadingTimerCounter; i++) {
+      loadingText = loadingText + loadingTextChar
+    }
+
+    if (!playlist) {
+      return (
+        <div className='sc'>
+          <div className='sc__loader'>{loadingText}</div>
+        </div>
+      )
+    }
+
     return (
       <div className='sc'>
-
-        <h3>{track ? track.title : ''}</h3>
-        <div className='grid__item one-third'>
-          {imgUrl &&
-            <img src={imgUrl} className='sc__playlist-row-img'/>
-          }
-        </div>
-
-        <PlayButton
-          className='sc__play'
-          {...this.props}
-        />
-
-        <PrevButton
-          className='sc__prev'
-          {...this.props}
-        />
-
-        <NextButton
-          className='sc__next'
-          {...this.props}
-        />
-
+        {this.renderTrackList()}
         <Progress
+          onSeekTrack={this.startPlaylist}
           className='sc__progress'
           innerClassName='sc__progress-inner'
           value={currentTime / duration * 100 || 0}
@@ -135,8 +177,6 @@ var CustomPlayer = React.createClass({
           innerStyle={{}}
           {...this.props}
         />
-
-        {this.renderTrackList()}
       </div>
     )
   }

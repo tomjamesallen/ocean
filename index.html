@@ -19,11 +19,16 @@ layout: default
     {% for release in site.releases %}{% if release.published %}
     <div class="releases__release release grid">
       {% if release.artwork %}
-      <div class="grid__item sm--ten-twelfths push--sm--two-twelfths med--seven-twelfths push--med--five-twelfths">
+      <div class="grid__item sm--ten-twelfths push--sm--two-twelfths med--seven-twelfths push--med--five-twelfths release__img-container">
         <img src="{{ release.artwork }}">
       </div>
       {% endif %}
-      <div class="release__react-soundcloud-container grid__item sm--nine-twelfths push--sm--three-twelfths med--six-twelfths push--med--six-twelfths" data-react-soundcloud-container={{ forloop.index0 }} id="react-soundcloud-container-{{ forloop.index0 }}"></div>
+      <div class="grid__item sm--nine-twelfths push--sm--three-twelfths med--six-twelfths push--med--six-twelfths">
+        {% if release.artist %}
+          <h2 class="release__title">{{ release.artist }}</h2>
+        {% endif %}
+        <div class="release__react-soundcloud-container" data-react-soundcloud-container={{ forloop.index0 }} id="react-soundcloud-container-{{ forloop.index0 }}"></div>
+      </div>
     </div>
     {% endif %}{% endfor %}
   </div>
