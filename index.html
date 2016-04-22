@@ -1,0 +1,29 @@
+---
+layout: default
+---
+
+<div class="home">
+
+  <script>
+
+    var posts = [];
+
+    {% for post in site.posts %}
+
+      posts.push({
+        title: "{{ post.title }}",
+        content: "{{ post.content | replace:'"','\"' | replace:"
+", "\n" }}",
+        url: "{{ post.url }}",
+        img: "{{ post["a-side-img"] }}"
+      });
+
+    {% endfor %}
+
+  </script>
+
+</div>
+
+
+
+
