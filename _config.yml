@@ -58,6 +58,10 @@ prose:
           element: "checkbox"
           label: "Published"
           value: true
+      - name: "artist"
+        field:
+          label: "The artist name"
+          element: "text"
       - name: "soundcloud_url"
         field:
           label: "The full soundcloud url"

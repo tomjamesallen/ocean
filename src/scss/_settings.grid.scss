@@ -30,7 +30,7 @@ $use-silent-classes:    false;
 /**
  * Would you like push and pull classes enabled?
  */
-$push:                  false;
+$push:                  true;
 $pull:                  false;
 
 
@@ -72,5 +72,5 @@ $grid-breakpoints: (
  * have been set to ‘true’.
  */
 $breakpoint-has-widths: ('sm', 'med', 'lrg');
-// $breakpoint-has-push:   ('sm', 'med', 'lrg');
+$breakpoint-has-push:   ('sm', 'med', 'lrg');
 // $breakpoint-has-pull:   ('sm', 'med', 'lrg');

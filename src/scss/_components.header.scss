@@ -1,0 +1,36 @@
+.header {
+  // &__inner-wrapper {
+  //   padding: $unit;
+  //   max-width: 900px;
+  //   margin: 0 auto;
+  // }
+
+  &__logo {
+    position: relative;
+    @include bp(med) {
+      position: absolute;
+    }
+    width: 100%;
+    max-width: 130px;
+    background-image: url(/media/logo-rough.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left center;
+    overflow: hidden;
+  }
+
+  &__logo-inner {
+    display: block;
+    position: relative;
+    padding-bottom: 40%;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+  }
+
+  &__logo-text {
+    display: inline-block;
+    position: relative;
+    text-indent: -9999px;
+  }
+}
