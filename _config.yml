@@ -27,7 +27,8 @@ exclude: [
   "Gemfile.lock",
   ".babelrc",
   ".eslintrc.json",
-  "server.js"
+  "server.js",
+  "react-templates"
 ]
 
 # Build settings

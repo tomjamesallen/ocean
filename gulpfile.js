@@ -75,6 +75,16 @@ gulp.task('build', function(callback) {
   );
 });
 
+require('gulp-react-tools')(gulp, {
+  commandPrefix: '',
+  componentTemplate: './react-templates/Component.react.js',
+  componentStyleTemplate: './react-templates/component.css',
+  componentDir: './src/js/components/',
+  componentStylesDir: './src/scss/',
 
+  componentName: '{{COMPONENT}}.react.js',
+  componentStylesName: '_components.{{COMPONENT_DASHED}}.scss',
 
-
+  appendStyleImportTemplate: "// @import 'components.{{COMPONENT_DASHED}}\n",
+  appendStyleImportTo: './src/scss/main.scss'
+});
