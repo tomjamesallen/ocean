@@ -46,15 +46,16 @@ var CustomPlayer = React.createClass({
 
     if (!playlist) return <div>Loading...</div>
 
+    // We're only interested in the first two tracks (A & AA).
+    playlist.tracks = [
+      playlist.tracks[0],
+      playlist.tracks[1]
+    ]
+
     let tracks = playlist.tracks.map((track, i) => {
-      let classes = classNames('flex flex-center full-width left-align button button-transparent', {
+      let classes = classNames('', {
         'is-active': this.state.activeIndex === i
       });
-
-      let imgUrl = track.artwork_url || playlist.artwork_url
-      if (imgUrl) {
-        imgUrl = imgUrl.replace('-large.', '-t500x500.')
-      }
 
       return (
         <div
@@ -62,10 +63,6 @@ var CustomPlayer = React.createClass({
           className='sc__playlist-row grid'
           onClick={this.playTrackAtIndex.bind(this, i)}
         >
-          <div className='grid__item one-third'>
-            <img src={imgUrl} className='sc__playlist-row-img'/>
-          </div>
-
           <div className='grid__item two-thirds'>
             <button
               className={classes}
@@ -88,12 +85,32 @@ var CustomPlayer = React.createClass({
   render() {
     let { playlist, currentTime, duration } = this.props
     let { playlistIndex } = this.state
-    let track = typeof playlistIndex === 'number' ? playlist.tracks[playlistIndex] : null
+    let track
+
+    if (typeof playlistIndex === 'number') {
+      track = playlist.tracks[playlistIndex]
+    }
+    else if (playlist && playlist.tracks[0]) {
+      track = playlist.tracks[0]
+    }
+
+    let imgUrl
+    if (track) {
+      imgUrl = track.artwork_url || playlist.artwork_url
+      if (imgUrl) {
+        imgUrl = imgUrl.replace('-large.', '-t500x500.')
+      }
+    }
 
     return (
-      <div>
+      <div className='sc'>
 
         <h3>{track ? track.title : ''}</h3>
+        <div className='grid__item one-third'>
+          {imgUrl &&
+            <img src={imgUrl} className='sc__playlist-row-img'/>
+          }
+        </div>
 
         <PlayButton
           className='sc__play'
