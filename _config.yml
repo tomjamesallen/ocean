@@ -41,7 +41,7 @@ collections:
 
 prose:
   rooturl: '_releases'
-  media: 'media'
+  media: 'media/artwork'
   ignore:
     - index.md
     - _config.yml
@@ -62,6 +62,13 @@ prose:
         field:
           label: "The full soundcloud url"
           element: "text"
+      - name: 'artwork'
+        field:
+          element: text
+          label: 'Artwork path'
+          help: "Url for the release's artwork. To upload an image: Click on the edit tab; Click the 'Insert Image' button in the toolbar and drag and drop an image on to the icon; Click insert - this will upload the image, you can then grab the image url (everything after '{{site.baseurl}}'), this is what you want to paste here. You can then delete that text from the editor. Sorry that‘s a little convoluted."
+          placeholder: '/media/artwork/FILE.jpg'
+          type: text
     _posts/static:
       - name: "layout"
         field:
