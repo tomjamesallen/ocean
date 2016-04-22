@@ -1,9 +1,13 @@
 import React from 'react'
-import Root from './Root'
 import ReactDOM from 'react-dom'
+import SoundcloudWidget from './components/SoundcloudWidget.react'
 
-const rootEl = document.getElementById('react-container')
+const releases = window.releases
 
-import history from './history'
-
-ReactDOM.render(<Root history={history} />, rootEl)
+releases.forEach((release, i) => {
+  const elId = `react-soundcloud-container-${i}`
+  let el = document.getElementById(elId)
+  if (el) {
+    ReactDOM.render(<SoundcloudWidget release={release} key={i} index={i} />, el)
+  }
+})
