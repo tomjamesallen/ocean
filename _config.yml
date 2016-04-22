@@ -33,6 +33,11 @@ exclude: [
 # Build settings
 markdown: kramdown
 
+collections:
+  releases:
+    output: true
+    permalink: /release/:path/
+
 prose:
   rooturl: '_releases'
   media: 'media'
@@ -41,8 +46,6 @@ prose:
     - _config.yml
     - /_layouts
     - /_includes
-  collections:
-    - releases
   metadata:
     _releases:
       - name: "title"

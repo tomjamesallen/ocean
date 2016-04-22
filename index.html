@@ -6,16 +6,12 @@ layout: default
 
   <script>
 
-    var posts = [];
+    var releases = [];
 
-    {% for post in site.posts %}
+    {% for release in site.releases %}
 
-      posts.push({
-        title: "{{ post.title }}",
-        content: "{{ post.content | replace:'"','\"' | replace:"
-", "\n" }}",
-        url: "{{ post.url }}",
-        img: "{{ post["a-side-img"] }}"
+      releases.push({
+        title: "{{ release.title }}"
       });
 
     {% endfor %}
@@ -23,7 +19,3 @@ layout: default
   </script>
 
 </div>
-
-
-
-
