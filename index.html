@@ -4,9 +4,10 @@ layout: default
 
 <div class="releases">
   <script>
-    var releases = [];
+    window.clientId = '73bc5f78348d25ac2e9035da7c8fff2e';
+    window.releases = [];
     {% for release in site.releases %}{% if release.published %}
-    releases.push({
+    window.releases.push({
       title: "{{ release.title }}",
       soundcloudUrl: "{{ release.soundcloud_url }}",
       index: {{forloop.index0}}
