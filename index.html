@@ -2,20 +2,22 @@
 layout: default
 ---
 
-<div class="home">
-
+<div class="releases">
   <script>
-
     var releases = [];
-
-    {% for release in site.releases %}
-
-      releases.push({
-        title: "{{ release.title }}"
-      });
-
-    {% endfor %}
-
+    {% for release in site.releases %}{% if release.published %}
+    releases.push({
+      title: "{{ release.title }}",
+      soundcloudUrl: "{{ release.soundcloud_url }}",
+      index: {{forloop.index0}}
+    });
+    {% endif %}{% endfor %}
   </script>
 
+  {% for release in site.releases %}{% if release.published %}
+  <div class="releases__release release">
+    <h2>{{ release.title }}</h2>
+    <div class="release__react-soundcloud-container" data-react-soundcloud-container={{ forloop.index0 }} id="react-soundcloud-container-{{ forloop.index0 }}"></div>
+  </div>
+  {% endif %}{% endfor %}
 </div>
