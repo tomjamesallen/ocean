@@ -45,6 +45,14 @@ prose:
     - releases
   metadata:
     _releases:
+      - name: "title"
+        field:
+          element: "text"
+          label: "title"
+      - name: "published"
+          element: "checkbox"
+          label: "Published"
+          value: true
       - name: "soundcloud_url"
         field:
           label: "The full soundcloud url"
