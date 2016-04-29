@@ -129,6 +129,11 @@ var CustomPlayer = React.createClass({
     }
   },
 
+  pause() {
+    let { soundCloudAudio } = this.props
+    soundCloudAudio.pause()
+  },
+
   render() {
     let { playlist, currentTime, duration } = this.props
     let { playlistIndex } = this.state
@@ -165,18 +170,38 @@ var CustomPlayer = React.createClass({
       )
     }
 
+    const { playing, soundCloudAudio } = this.props
+    let playPause
+    if (!playing) {
+      playPause = (
+        <button
+          className='sc__play-pause sc__play'
+          onClick={this.startPlaylist}>Play</button>
+      )
+    }
+    else {
+      playPause = (
+        <button
+          className='sc__play-pause sc__pause'
+          onClick={this.pause}>Stop</button>
+      )
+    }
+
     return (
       <div className='sc'>
         {this.renderTrackList()}
-        <Progress
-          onSeekTrack={this.startPlaylist}
-          className='sc__progress'
-          innerClassName='sc__progress-inner'
-          value={currentTime / duration * 100 || 0}
-          style={{}}
-          innerStyle={{}}
-          {...this.props}
-        />
+        <div className='sc__progress-wrapper'>
+          {playPause}
+          <Progress
+            onSeekTrack={this.startPlaylist}
+            className='sc__progress'
+            innerClassName='sc__progress-inner'
+            value={currentTime / duration * 100 || 0}
+            style={{}}
+            innerStyle={{}}
+            {...this.props}
+          />
+        </div>
       </div>
     )
   }
