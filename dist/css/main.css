@@ -495,6 +495,7 @@ html {
 
 body {
   font-family: "Helvetica Neue", Helvetica, "sans-serif";
+  font-family: 'Trade Gothic W01', Helvetica, "sans-serif";
   font-weight: 200;
 }
 
@@ -575,7 +576,6 @@ body {
   padding: 1rem;
   max-width: 900px;
   margin: 0 auto;
-  border-left: 2px dotted rgba(0, 0, 0, 0.05);
 }
 
 /*------------------------------------*    $CSSWIZARDRY-GRIDS
@@ -1812,7 +1812,7 @@ body {
   position: relative;
   width: 100%;
   max-width: 130px;
-  background-image: url(/media/logo-rough.jpg);
+  background-image: url(/media/OC-N_Logo_Png.png);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: left center;
