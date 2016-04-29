@@ -1748,19 +1748,21 @@ body {
 .sc__play, .sc__pause {
   position: absolute;
   left: 0;
-  width: auto;
-  margin: 0;
+  width: 19.2px;
+  width: 1.5rem;
+  height: 19.2px;
+  height: 1.5rem;
   border: none;
   outline: none;
-  padding: 0;
   background: none;
-  top: -2px;
+  top: -4.224px;
+  top: -0.33rem;
 }
 
 .sc__progress-wrapper {
   position: relative;
-  padding-left: 25.6px;
-  padding-left: 2rem;
+  padding-left: 22.4px;
+  padding-left: 1.75rem;
 }
 
 .sc__progress {
@@ -1831,7 +1833,7 @@ body {
 
 @media (min-width: 800px) {
   .header__logo {
-    position: absolute;
+    position: fixed;
   }
 }
 
@@ -1855,9 +1857,25 @@ body {
   margin-bottom: 6rem;
 }
 
+@media (min-width: 800px) {
+  .release__img-outer-wrapper {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+}
+
 .release__img-container {
+  position: relative;
   margin-bottom: 12.8px;
   margin-bottom: 1rem;
+}
+
+.release__img {
+  display: block;
+  position: relative;
+  z-index: 120;
 }
 
 .release__title {

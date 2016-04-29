@@ -8,7 +8,7 @@
   &__logo {
     position: relative;
     @include bp(med) {
-      position: absolute;
+      position: fixed;
     }
     width: 100%;
     max-width: 130px;

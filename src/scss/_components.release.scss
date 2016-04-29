@@ -2,8 +2,25 @@
 
   margin-bottom: $unit*6;
 
+  &__img-outer-wrapper {
+    @include bp(med) {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+  }
   &__img-container {
+    position: relative;
     margin-bottom: $unit;
+  }
+  &__img-inner-wrapper {
+    
+  }
+  &__img {
+    display: block;
+    position: relative;
+    z-index: 120;
   }
 
   &__title {

@@ -4,13 +4,15 @@
   &__pause {
     position: absolute;
     left: 0;
-    width: auto;
-    margin: 0;
+    width: $unit*1.5;
+    height: $unit*1.5;
+    // width: auto;
+    // margin: 0;
     border: none;
     outline: none;
-    padding: 0;
+    // padding: 0;
     background: none;
-    top: -2px;
+    top: -$unit*.33;
   }
 
   &__progress-wrapper {
@@ -18,7 +20,7 @@
     // align-items: center;
     // justify-content: center;
     position: relative;
-    padding-left: $unit*2;
+    padding-left: $unit*1.75;
   }
 
   &__progress {

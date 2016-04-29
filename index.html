@@ -19,8 +19,12 @@ layout: default
     {% for release in site.releases %}{% if release.published %}
     <div class="releases__release release grid">
       {% if release.artwork %}
-      <div class="grid__item sm--ten-twelfths push--sm--two-twelfths med--seven-twelfths push--med--five-twelfths release__img-container">
-        <img src="{{ release.artwork }}">
+      <div class="release__img-outer-wrapper">
+        <div class="grid__item sm--ten-twelfths push--sm--two-twelfths med--seven-twelfths push--med--five-twelfths release__img-container">
+          <div class="release__img-inner-wrapper">
+            <img class="release__img" src="{{ release.artwork }}">
+          </div>
+        </div>
       </div>
       {% endif %}
       <div class="grid__item sm--nine-twelfths push--sm--three-twelfths med--six-twelfths push--med--six-twelfths">

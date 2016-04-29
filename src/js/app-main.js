@@ -1,3 +1,5 @@
+/* global Stickyfill */
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 import SoundcloudWidget from './components/SoundcloudWidget.react'
